@@ -16,7 +16,6 @@ This workflow takes prospect/client information received and automatically sends
 
 - ✅ Automated DocuSign envelope sending
 - ✅ Prospect/client data validation
-- ✅ Error handling and logging
 - ✅ Customizable document templates
 - ✅ Integration with CRM systems (if applicable)
 
@@ -25,9 +24,7 @@ This workflow takes prospect/client information received and automatically sends
 ### DocuSign Requirements
 - DocuSign account with API access
 - DocuSign Integration Key
-- DocuSign User ID
 - DocuSign Account ID
-- RSA Private Key for JWT authentication
 
 ### n8n Requirements
 - n8n instance (cloud or self-hosted)
