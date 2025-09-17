@@ -1,10 +1,10 @@
 # Send DocuSign Automation
 
-An n8n workflow automation that automates the process of sending DocuSign envelopes to prospects and clients.
+An n8n workflow that automates the process of sending DocuSign envelopes to prospects and clients.
 
 ## Overview
 
-This workflow takes prospect/client information and automatically sends the specified DocuSign envelope, eliminating manual document sending processes and improving client onboarding efficiency.
+This workflow takes prospect/client information received and automatically sends a docusign. 
 
 ## Inputs Required
 
