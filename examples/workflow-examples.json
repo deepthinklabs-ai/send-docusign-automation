@@ -1,0 +1,133 @@
+{
+  "examples": {
+    "manual_trigger": {
+      "description": "Manual trigger execution - no input required",
+      "note": "Uses hardcoded values in 'Set for signerName and signerEmail' node",
+      "current_defaults": {
+        "signerName": "David Albin",
+        "signerEmail": "dave@deepthinklabs.ai",
+        "templateId": "c3746378-a6d3-4caa-aeeb-15e3587a4af4"
+      }
+    },
+    "form_trigger_input": {
+      "description": "Expected input from form submissions",
+      "payload": {
+        "signerName": "John Doe",
+        "signerEmail": "john.doe@example.com",
+        "companyName": "Example Corp",
+        "phoneNumber": "+1-555-123-4567"
+      }
+    },
+    "gmail_trigger_data": {
+      "description": "Extracted data from Gmail trigger",
+      "payload": {
+        "from": "client@company.com",
+        "subject": "Contract Request",
+        "bodyPlain": "Please send me the contract for review...",
+        "signerName": "Client Name",
+        "signerEmail": "client@company.com"
+      }
+    },
+    "sheets_trigger_row": {
+      "description": "New row data from Google Sheets trigger",
+      "payload": {
+        "Name": "Jane Smith",
+        "Email": "jane.smith@business.com",
+        "Company": "Business Inc",
+        "Contract Type": "Service Agreement",
+        "Date Requested": "2025-09-17"
+      }
+    }
+  },
+  "docusign_responses": {
+    "successful_envelope_creation": {
+      "envelopeId": "12345678-abcd-efgh-ijkl-123456789012",
+      "status": "sent",
+      "statusDateTime": "2025-09-17T10:30:00.0000000Z",
+      "uri": "/envelopes/12345678-abcd-efgh-ijkl-123456789012"
+    },
+    "account_info_response": {
+      "sub": "12345678-1234-1234-1234-123456789012",
+      "name": "David Albin",
+      "given_name": "David",
+      "family_name": "Albin",
+      "email": "dave@deepthinklabs.ai",
+      "accounts": [
+        {
+          "account_id": "12345678-abcd-efgh-ijkl-123456789012",
+          "is_default": true,
+          "account_name": "DeepThinkLabs AI",
+          "base_uri": "https://demo.docusign.net"
+        }
+      ]
+    },
+    "template_envelope_request": {
+      "templateId": "c3746378-a6d3-4caa-aeeb-15e3587a4af4",
+      "templateRoles": [
+        {
+          "roleName": "Signer",
+          "name": "John Doe",
+          "email": "john.doe@example.com"
+        }
+      ],
+      "status": "sent"
+    }
+  },
+  "workflow_customization": {
+    "template_options": {
+      "current_template": "c3746378-a6d3-4caa-aeeb-15e3587a4af4",
+      "note": "To use different templates, update the templateId in 'Send Template Envelope' node",
+      "dynamic_template_example": {
+        "templateId": "{{ $json.templateChoice }}",
+        "templateRoles": [
+          {
+            "roleName": "Signer",
+            "name": "{{ $json.signerName }}",
+            "email": "{{ $json.signerEmail }}"
+          }
+        ],
+        "status": "sent"
+      }
+    },
+    "environment_switching": {
+      "demo_urls": {
+        "account_info": "https://account-d.docusign.com/oauth/userinfo",
+        "api_base": "https://demo.docusign.net/restapi"
+      },
+      "production_urls": {
+        "account_info": "https://account.docusign.com/oauth/userinfo",
+        "api_base": "https://na1.docusign.net/restapi"
+      },
+      "note": "Update URLs in 'Connect to Docusign Account' node for production"
+    }
+  },
+  "integration_examples": {
+    "webhook_form_html": {
+      "description": "HTML form example for webhook integration",
+      "code": "<!DOCTYPE html>\\n<html>\\n<body>\\n  <form action='YOUR_N8N_WEBHOOK_URL' method='post'>\\n    <input name='signerName' placeholder='Full Name' required>\\n    <input name='signerEmail' type='email' placeholder='Email' required>\\n    <button type='submit'>Send DocuSign</button>\\n  </form>\\n</body>\\n</html>"
+    },
+    "javascript_api_call": {
+      "description": "JavaScript example to trigger workflow",
+      "code": "fetch('YOUR_N8N_WEBHOOK_URL', {\\n  method: 'POST',\\n  headers: { 'Content-Type': 'application/json' },\\n  body: JSON.stringify({\\n    signerName: 'John Doe',\\n    signerEmail: 'john@example.com'\\n  })\\n}).then(response => response.json())\\n.then(data => console.log(data));"
+    }
+  },
+  "troubleshooting": {
+    "common_errors": {
+      "invalid_template": {
+        "error": "Template not found",
+        "solution": "Verify templateId exists and is shared with API user",
+        "check": "Templates section in DocuSign web interface"
+      },
+      "authentication_failed": {
+        "error": "OAuth2 authentication failed",
+        "solution": "Check Integration Key and Secret in n8n credentials",
+        "check": "Apps and Keys section in DocuSign Admin"
+      },
+      "account_access": {
+        "error": "Account information not accessible",
+        "solution": "Ensure OAuth2 app has proper permissions",
+        "check": "App permissions in DocuSign Admin panel"
+      }
+    }
+  }
+}
