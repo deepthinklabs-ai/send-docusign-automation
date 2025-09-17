@@ -25,6 +25,7 @@ This workflow takes prospect/client information received and automatically sends
 - DocuSign account with API access
 - DocuSign Integration Key
 - DocuSign Account ID
+- Template ID (From Docusign)
 
 ### n8n Requirements
 - n8n instance (cloud or self-hosted)
@@ -105,6 +106,8 @@ The workflow includes comprehensive error handling for:
 ## Support
 
 For issues or questions:
+Creator email: dave@deepthinklabs.ai - Pleae feel free to email me and we can connect. Happy to help!
+
 1. Check n8n execution logs
 2. Verify DocuSign API credentials
 3. Review workflow configuration
